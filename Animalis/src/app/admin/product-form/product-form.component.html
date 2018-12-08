@@ -1,14 +1,14 @@
 
-<form>
+<form #f="ngForm" (ngSubmit)="save(f.value)">
   <div class="form-group">
     <label for="title">Nazwa produktu</label>
-    <input id="title" type="text" class="form-control">
+    <input ngModel name="title" id="title" type="text" class="form-control">
   </div>
   <div class="form-group">
     <label for="price">Cena</label>
     <div class="input-group-prepend">
       <span class="input-group-text">PLN</span>
-      <input id="price" type="number" class="form-control">
+      <input ngModel name="price" id="price" type="number" class="form-control">
     </div>
   </div>
   <div class="form-group">
@@ -24,7 +24,7 @@
 
   <div class="form-group">
       <label for="imageUrl">URL obrazka</label>
-      <input id="imageUrl" type="text" class="form-control">
+      <input ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
   </div>
   <button class="btn btn-primary">Zapisz</button>
 </form>
