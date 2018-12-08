@@ -1,18 +1,18 @@
 
 <form>
   <div class="form-group">
-    <label for="title">Title</label>
+    <label for="title">Nazwa produktu</label>
     <input id="title" type="text" class="form-control">
   </div>
   <div class="form-group">
-    <label for="price">Price</label>
+    <label for="price">Cena</label>
     <div class="input-group-prepend">
-      <span class="input-group-text">$</span>
+      <span class="input-group-text">PLN</span>
       <input id="price" type="number" class="form-control">
     </div>
   </div>
   <div class="form-group">
-    <label for="category">Category</label>
+    <label for="category">Kategoria produktu</label>
     <select ngModel name="category" id="category" class="form-control">
         <option value=""></option>
         <option *ngFor="let c of categories$ | async " [value]="c.key">
@@ -23,8 +23,8 @@
   </div>
 
   <div class="form-group">
-      <label for="imageUrl">Image URL</label>
+      <label for="imageUrl">URL obrazka</label>
       <input id="imageUrl" type="text" class="form-control">
   </div>
-  <button class="btn btn-primary">Save</button>
+  <button class="btn btn-primary">Zapisz</button>
 </form>
