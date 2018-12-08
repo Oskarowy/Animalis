@@ -1,14 +1,23 @@
+import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
+observableCategories$: Observable<any>;
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { 
+    this.observableCategories$ = this.db.list('/categories',
+    ref => ref.orderByChild('name')).snapshotChanges();
+  }
 
   getCategories() {
-    return this.db.list('/categories');
+    return this.observableCategories$.pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    }));
   }
 }

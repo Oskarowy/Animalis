@@ -13,10 +13,15 @@
   </div>
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" class="form-control">
-      <option value=""></option>
-    </select>
+    <select ngModel name="category" id="category" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let c of categories$ | async " [value]="c.key">
+           {{c.name}} 
+        </option>
+   
+      </select>
   </div>
+
   <div class="form-group">
       <label for="imageUrl">Image URL</label>
       <input id="imageUrl" type="text" class="form-control">
