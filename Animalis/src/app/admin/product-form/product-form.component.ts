@@ -28,7 +28,14 @@ id;
   save(product) {
     if(this.id) this.productService.update(this.id, product);
     else this.productService.create(product);
+
+    this.router.navigate(['/admin/products']);
+  }
+  
+  delete() {
+    if(!confirm('Czy na pewno chcesz usunąć ten produkt?')) return; 
     
+    this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);
   }
 
