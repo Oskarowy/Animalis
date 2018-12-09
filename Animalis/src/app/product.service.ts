@@ -23,4 +23,8 @@ observableProducts$: Observable<any>;
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     }));
   }
+
+  get(productId) {
+    return this.db.object('/products/' + productId).valueChanges();
+  }
 }
