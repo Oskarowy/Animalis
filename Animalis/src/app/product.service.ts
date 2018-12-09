@@ -10,7 +10,7 @@ export class ProductService {
 observableProducts$: Observable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.observableProducts$ = this.db.list('/products').snapshotChanges();
+    this.observableProducts$ = this.db.list('/products', ref => ref.orderByChild('title')).snapshotChanges();
    }
 
   create(product) {
@@ -20,7 +20,13 @@ observableProducts$: Observable<any>;
   getAll() {
     return this.observableProducts$.pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        return changes.map(c => ({ 
+          key: c.key,
+          title: c.payload.val().title,
+          imageUrl: c.payload.val().imageUrl,
+          price: c.payload.val().price,
+          category: c.payload.val().category
+        }));
     }));
   }
 
