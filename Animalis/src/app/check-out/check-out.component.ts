@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Subscription } from 'rxjs';
 import { ShoppingCart } from './../models/shopping-cart';
 import { ShoppingCartService } from './../shopping-cart.service';
@@ -12,9 +13,12 @@ import { OrderService } from '../order.service';
 export class CheckOutComponent implements OnInit, OnDestroy { 
   shipping = {}; 
   cart: ShoppingCart;
-  subscription: Subscription;
+  userId: string;
+  cartSubscription: Subscription;
+  userSubscription: Subscription;
 
   constructor (
+    private authService: AuthService,
     private orderService: OrderService,
     private shoppingCartService: ShoppingCartService) {
 
@@ -22,6 +26,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   
   placeOrder() {
     let order = {
+      userId: this.userId,
       datePlaced: new Date().getTime(),
       shipping: this.shipping,
       items: this.cart.items.map(i => {
@@ -36,16 +41,18 @@ export class CheckOutComponent implements OnInit, OnDestroy {
         }
       })
     };
-    
+
     this.orderService.storeOrder(order);
   } 
   
   async ngOnInit () {
     let cart$ = await this.shoppingCartService.getCart();
-    this.subscription = cart$.subscribe(cart => this.cart = cart);
+    this.cartSubscription = cart$.subscribe(cart => this.cart = cart);
+    this.userSubscription = this.authService.user$.subscribe(user => this.userId = user.uid);
   }
 
   ngOnDestroy () {
-    this.subscription.unsubscribe();
+    this.cartSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }
