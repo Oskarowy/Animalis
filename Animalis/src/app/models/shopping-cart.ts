@@ -6,7 +6,7 @@ export class ShoppingCart {
 
     constructor(
         public productId: string, 
-        public itemsMap: { [key: string]: ShoppingCartItem }) {  
+        private itemsMap: { [key: string]: ShoppingCartItem }) {  
             this.itemsMap = itemsMap || {}; 
 
             for (let prodId in itemsMap) {
