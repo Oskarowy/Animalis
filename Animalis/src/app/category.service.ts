@@ -14,7 +14,7 @@ observableCategories$: Observable<any>;
     ref => ref.orderByChild('name')).snapshotChanges();
   }
 
-  getCategories() {
+  getAll() {
     return this.observableCategories$.pipe(
       map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
