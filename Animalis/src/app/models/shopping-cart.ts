@@ -7,13 +7,15 @@ export class ShoppingCart {
     constructor(
         public productId: string, 
         private itemsMap: { [key: string]: ShoppingCartItem }) {  
-            this.itemsMap = itemsMap || {}; 
+            this.itemsMap = itemsMap || {};
+            let sum = 0; 
 
             for (let prodId in itemsMap) {
                 let item = itemsMap[prodId];
                 this.items.push(new ShoppingCartItem({
                     ...item, key: prodId }));
         }
+
     }
 
     getQuantity(product: Product) {

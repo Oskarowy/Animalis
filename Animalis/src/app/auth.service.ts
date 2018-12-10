@@ -14,6 +14,7 @@ export class AuthService {
   user$: Observable<firebase.User>;
   
   constructor(
+    private router: Router,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
     private userService: UserService) {
@@ -30,6 +31,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
   }
 
   get appUser$(): Observable<AppUser> {

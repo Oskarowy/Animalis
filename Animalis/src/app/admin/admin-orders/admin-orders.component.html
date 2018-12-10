@@ -1,3 +1,21 @@
-<p>
-  admin-orders works!
-</p>
+<h1>Wszystkie zamówienia</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Dane zamawiającego</th>
+      <th>Data złożenia zamówienia</th>
+      <!-- <th>Wartość zamówienia</th> -->
+      <th></th>
+    </tr>
+  </thead> 
+  <tbody>
+    <tr *ngFor="let order of orders$ | async">
+      <td>{{ order.shipping.name }}</td>
+      <td>{{ order.datePlaced | date:'fullDate'}}</td>
+      <!-- <td>{{ order.totalPrice }}</td> -->
+      <td>
+        <a href="#">Szczegóły</a>
+      </td>
+    </tr>
+  </tbody> 
+</table>
