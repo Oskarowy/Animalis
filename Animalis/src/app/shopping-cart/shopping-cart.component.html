@@ -2,6 +2,10 @@
 <div class="row col-10" *ngIf="cart$ | async as cart">
   <p>
     Liczba przedmiotów w Twoim koszyku wynosi: {{ cart.totalItemsCount }}.
+    <button 
+    *ngIf="cart.items.length"
+    (click)="clearCart()"
+    class="btn btn-light btn-sm">Wyczyść koszyk</button>
   </p>
   <table class="table">
     <thead>
@@ -37,7 +41,8 @@
       </tr>
     </tfoot>
   </table>
-  <button 
-  (click)="clearCart()"
-  class="btn btn-danger btn-sm">Wyczyść koszyk</button>
+  <a 
+    *ngIf="cart.items.length"
+    routerLink="/check-out"
+    class="btn btn-primary">Potwierdź zamówienie</a>
 </div>
