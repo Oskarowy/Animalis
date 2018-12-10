@@ -1,3 +1,9 @@
-<p>
-  products works!
-</p>
+
+<div *ngFor="let p of products$ | async" class="card" style="width: 15rem;">
+  <img class="card-img-top" [src]="p.imageUrl">
+  <div class="card-body">
+    <h4 class="card-title">{{ p.title }}</h4>
+    <p class="card-text">{{ p.price | currency:'PLN':true }}</p>
+    <a href="#" class="btn btn-primary">Dodaj do koszyka</a>
+  </div>
+</div>
