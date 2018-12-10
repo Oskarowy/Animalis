@@ -15,4 +15,8 @@ cart$;
     this.cart$ = await this.shoppingCartService.getCart();
   }
 
+  clearCart() {
+    this.shoppingCartService.clearCart();
+  }
+
 }
