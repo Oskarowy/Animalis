@@ -1,12 +1,11 @@
 <h1>Twój koszyk</h1>
-<div class="row col-10" *ngIf="cart$ | async as cart">
-  <p>
-    Liczba przedmiotów w Twoim koszyku wynosi: {{ cart.totalItemsCount }}.
-    <button 
-    *ngIf="cart.items.length"
-    (click)="clearCart()"
-    class="btn btn-light btn-sm">Wyczyść koszyk</button>
-  </p>
+<div class="card" *ngIf="cart$ | async as cart" style="width: 80%;">
+  <div class="card-body">
+    <p>
+      Liczba przedmiotów w Twoim koszyku wynosi: {{ cart.totalItemsCount }}.
+      <button *ngIf="cart.items.length" (click)="clearCart()" class="float-right btn btn-light btn-sm">Wyczyść koszyk</button>
+    </p>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -39,10 +38,10 @@
         <th></th>
         <th class="text-right">{{ cart.totalPrice | currency:'PLN':'symbol' }}</th>
       </tr>
+      <tr>
+        <th colspan="4"><a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Realizuj
+            zamówienie</a></th>
+      </tr>
     </tfoot>
   </table>
-  <a 
-    *ngIf="cart.items.length"
-    routerLink="/check-out"
-    class="btn btn-primary">Realizuj zamówienie</a>
 </div>
