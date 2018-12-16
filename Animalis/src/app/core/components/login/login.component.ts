@@ -23,4 +23,8 @@ export class LoginComponent {
   googleLogin(){
     this.login("google");
   }
+
+  anonymousLogin() {
+    this.login(null);
+  }
 }

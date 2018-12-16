@@ -25,8 +25,11 @@ export class AuthService {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
 
-    let provider = this.getProvider(providerName);
-    this.afAuth.auth.signInWithRedirect(provider);
+    if(!providerName) this.afAuth.auth.signInAnonymously();
+    else {
+      let provider = this.getProvider(providerName);
+      this.afAuth.auth.signInWithRedirect(provider);
+    }
   }
 
   logout() {
