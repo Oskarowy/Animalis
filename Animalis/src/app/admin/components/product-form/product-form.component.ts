@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
 categories$;
-product = {};
+product:any = {}; 
 id;
 
   constructor(
