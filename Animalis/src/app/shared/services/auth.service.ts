@@ -21,12 +21,12 @@ export class AuthService {
     this.user$ = afAuth.authState;
   }
 
-  login() {
+  login(providerName: string) {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
-    
-    this.afAuth.auth.signInWithRedirect(
-      new firebase.auth.GoogleAuthProvider());
+
+    let provider = this.getProvider(providerName);
+    this.afAuth.auth.signInWithRedirect(provider);
   }
 
   logout() {
@@ -43,5 +43,18 @@ export class AuthService {
           return of(null);
         }
       }));
+  }
+
+  private getProvider(providerName: string) {
+    switch(providerName)
+    {
+      case "facebook": 
+        return new firebase.auth.FacebookAuthProvider();
+
+      case "google": 
+        return new firebase.auth.GoogleAuthProvider();
+
+      default: return new firebase.auth.FacebookAuthProvider();
+    }
   }
 }

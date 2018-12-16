@@ -12,7 +12,15 @@ export class LoginComponent {
     
   }
 
-  login() {
-    this.auth.login();
+  login(providerName: string) {
+    this.auth.login(providerName);
+  }
+
+  fbLogin(){
+    this.login("facebook");
+  }
+
+  googleLogin(){
+    this.login("google");
   }
 }

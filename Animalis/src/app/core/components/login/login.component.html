@@ -1,4 +1,17 @@
 
-<button 
-(click)="login()"
-class="btn btn-primary">Login with Google</button>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="list-group">
+            <h3 class="text-center">Wybierz metodę logowania</h3>
+            <button 
+            (click)="googleLogin()"
+            class="list-group-item list-group-item-action login-btn">Logowanie z kontem Google</button>
+            
+            <button 
+            (click)="fbLogin()"
+            class="list-group-item list-group-item-action login-btn">Logowanie przez Facebook</button>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>
